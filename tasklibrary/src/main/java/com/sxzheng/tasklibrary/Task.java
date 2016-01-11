@@ -3,7 +3,7 @@ package com.sxzheng.tasklibrary;
 /**
  * Author zhengsx.
  */
-public class Task<T> implements Comparable<Task<T>> {
+public abstract class Task<T, R> implements Comparable<Task<T, R>>, Runnable {
 
     private Integer mSequence;
 
@@ -13,7 +13,7 @@ public class Task<T> implements Comparable<Task<T>> {
     private boolean mCancelled;
 
     @Override
-    public int compareTo(Task<T> another) {
+    public int compareTo(Task<T, R> another) {
         Priority left = this.getPriority();
         Priority right = another.getPriority();
 
@@ -31,6 +31,17 @@ public class Task<T> implements Comparable<Task<T>> {
     public boolean isCancelled() {
         return mCancelled;
     }
+
+    public void cancel() {
+        mCancelled = true;
+    }
+
+    @Override
+    public final void run() {
+        execute();
+    }
+
+    public abstract R execute();
 
     public enum Priority {
         LOW,

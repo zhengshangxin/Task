@@ -17,7 +17,6 @@ public class TaskDispatcher extends Thread {
         mQueue = queue;
     }
 
-
     @Override
     public void run() {
         Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
@@ -37,6 +36,7 @@ public class TaskDispatcher extends Thread {
             if (task.isCancelled()) {
                 continue;
             }
+            task.run();
         }
     }
 

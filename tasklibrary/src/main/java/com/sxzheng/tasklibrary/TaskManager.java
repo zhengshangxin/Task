@@ -46,4 +46,16 @@ public class TaskManager {
             if (mTaskDispatcher != null) mTaskDispatcher.quit();
         }
     }
+
+    public int getSequenceNumber(){
+        return mSequenceGenerator.incrementAndGet();
+    }
+
+    public void cancelAll() {
+        synchronized (mCurrentTasks) {
+            for (Task task : mCurrentTasks) {
+                task.cancel();
+            }
+        }
+    }
 }
