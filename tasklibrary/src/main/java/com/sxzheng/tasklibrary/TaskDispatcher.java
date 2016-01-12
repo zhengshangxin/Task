@@ -5,7 +5,7 @@ import android.os.Process;
 import java.util.concurrent.BlockingQueue;
 
 /**
- * Author zhengsx.
+ * @Author zhengsx.
  */
 public class TaskDispatcher extends Thread {
 

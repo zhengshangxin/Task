@@ -9,7 +9,7 @@ import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Author zhengsx.
+ * @Author zhengsx.
  */
 public class TaskManager {
 
@@ -30,6 +30,13 @@ public class TaskManager {
     public TaskManager(int threadPoolSize) {
 
         mTaskDispatchers = new TaskDispatcher[threadPoolSize];
+    }
+
+    public void offer(Task<?> task) {
+        if (task != null) {
+            task.setSequence(getSequenceNumber());
+            mQueue.offer(task);
+        }
     }
 
     public void start() {

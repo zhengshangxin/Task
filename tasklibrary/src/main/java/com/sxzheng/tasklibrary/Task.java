@@ -1,9 +1,9 @@
 package com.sxzheng.tasklibrary;
 
 /**
- * Author zhengsx.
+ * @Author zhengsx.
  */
-public abstract class Task<T, R> implements Comparable<Task<T, R>>, Runnable {
+public abstract class Task<T> implements Comparable<Task<T>>, Runnable {
 
     private Integer mSequence;
 
@@ -13,7 +13,7 @@ public abstract class Task<T, R> implements Comparable<Task<T, R>>, Runnable {
     private boolean mCancelled;
 
     @Override
-    public int compareTo(Task<T, R> another) {
+    public int compareTo(Task<T> another) {
         Priority left = this.getPriority();
         Priority right = another.getPriority();
 
@@ -41,7 +41,11 @@ public abstract class Task<T, R> implements Comparable<Task<T, R>>, Runnable {
         execute();
     }
 
-    public abstract R execute();
+    public abstract void execute();
+
+    public void setSequence(int sequence) {
+        mSequence = sequence;
+    }
 
     public enum Priority {
         LOW,
