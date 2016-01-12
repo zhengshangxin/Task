@@ -1,6 +1,7 @@
 package com.sxzheng.tasklibrary;
 
 import android.os.Process;
+import android.util.Log;
 
 import java.util.concurrent.BlockingQueue;
 
@@ -13,6 +14,8 @@ public class TaskDispatcher extends Thread {
 
     private volatile boolean mQuit = false;
 
+    private int i;
+
     public TaskDispatcher(BlockingQueue<Task<?>> queue) {
         mQueue = queue;
     }
@@ -22,7 +25,8 @@ public class TaskDispatcher extends Thread {
         Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
 
         while (true) {
-
+            Log.e(this.getClass().getName(), "Thread: " +
+                    getName() + " is running!" + "" + (i++));
             Task task;
             try {
                 task = mQueue.take();
@@ -36,6 +40,7 @@ public class TaskDispatcher extends Thread {
             if (task.isCancelled()) {
                 continue;
             }
+
             task.run();
         }
     }

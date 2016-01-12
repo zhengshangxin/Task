@@ -27,6 +27,10 @@ public class TaskManager {
 
     private TaskDispatcher[] mTaskDispatchers;
 
+    public TaskManager() {
+        mTaskDispatchers = new TaskDispatcher[DEFAULT_THREAD_POOL_SIZE];
+    }
+
     public TaskManager(int threadPoolSize) {
 
         mTaskDispatchers = new TaskDispatcher[threadPoolSize];
@@ -34,6 +38,12 @@ public class TaskManager {
 
     public void offer(Task<?> task) {
         if (task != null) {
+            try {
+                task.setTaskManager(this);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return;
+            }
             task.setSequence(getSequenceNumber());
             mQueue.offer(task);
         }
@@ -43,6 +53,7 @@ public class TaskManager {
         stop();
         for (int i = 0; i < mTaskDispatchers.length; i++) {
             TaskDispatcher taskDispatcher = new TaskDispatcher(mQueue);
+            taskDispatcher.setName("TaskDispatcher " + i);
             mTaskDispatchers[i] = taskDispatcher;
             mTaskDispatchers[i].start();
         }
