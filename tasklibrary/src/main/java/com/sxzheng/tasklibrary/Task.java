@@ -1,7 +1,9 @@
 package com.sxzheng.tasklibrary;
 
+import android.support.annotation.NonNull;
+
 /**
- * @Author zhengsx.
+ * @author zhengshangxin.
  */
 public abstract class Task<T> implements Comparable<Task<T>>, Runnable {
 
@@ -46,27 +48,27 @@ public abstract class Task<T> implements Comparable<Task<T>>, Runnable {
 
     public void setTaskManager(TaskManager manager) throws Exception {
         if (mTaskManager != null) {
-            throw new IllegalAccessException("Task has bindded with a task manager!");
+            throw new IllegalAccessException("Task has been bound with a task " +
+                    "manager!");
         }
 
         mTaskManager = manager;
     }
 
     @Override
-    public int compareTo(Task<T> another) {
+    public int compareTo(@NonNull Task<T> another) {
         Priority left = this.getPriority();
         Priority right = another.getPriority();
 
-        // High-priority requests are "lesser" so they are sorted to the front.
-        // Equal priorities are sorted by sequence number to provide FIFO ordering.
         return left == right ? this.mSequence - another.mSequence :
                 right.ordinal() - left.ordinal();
     }
 
-    public enum Priority {
-        LOW,
-        NORMAL,
-        HIGH,
-        IMMEDIATE
+    public void setTag(Object tag) {
+        mTag = tag;
+    }
+
+    public Object getTag() {
+        return mTag;
     }
 }

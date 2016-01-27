@@ -9,7 +9,10 @@ import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * @Author zhengsx.
+ * @author zhengshangxin
+ *
+ * Each task manager is correspondence with a task queue that is independent with
+ * others.
  */
 public class TaskManager {
 
