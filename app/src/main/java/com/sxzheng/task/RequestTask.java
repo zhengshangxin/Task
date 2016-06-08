@@ -4,9 +4,6 @@ import android.util.Log;
 
 import com.sxzheng.tasklibrary.Task;
 
-/**
- * @Author zhengsx.
- */
 public class RequestTask extends Task<String> {
 
     @Override
