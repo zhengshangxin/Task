@@ -9,7 +9,7 @@ import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * @Author zhengsx.
+ * @author zheng.
  */
 public class TaskManager {
 

@@ -1,12 +1,12 @@
 package com.sxzheng.tasklibrary;
 
+import java.util.concurrent.BlockingQueue;
+
 import android.os.Process;
 import android.util.Log;
 
-import java.util.concurrent.BlockingQueue;
-
 /**
- * @Author zhengsx.
+ * @author zheng.
  */
 public class TaskDispatcher extends Thread {
 

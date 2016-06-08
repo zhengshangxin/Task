@@ -1,15 +1,15 @@
 package com.sxzheng.tasklibrary;
 
 /**
- * @Author zhengsx.
+ * @author zheng.
  */
 public abstract class Task<T> implements Comparable<Task<T>>, Runnable {
 
     private Object mTag;
 
-    private Integer mSequence;
-    private TaskManager mTaskManager;
-    private volatile boolean mCancelled;
+    private          Integer     mSequence;
+    private          TaskManager mTaskManager;
+    private volatile boolean     mCancelled;
 
     private Priority mPriority = Priority.NORMAL;
 
@@ -54,13 +54,10 @@ public abstract class Task<T> implements Comparable<Task<T>>, Runnable {
 
     @Override
     public int compareTo(Task<T> another) {
-        Priority left = this.getPriority();
+        Priority left  = this.getPriority();
         Priority right = another.getPriority();
-
-        // High-priority requests are "lesser" so they are sorted to the front.
-        // Equal priorities are sorted by sequence number to provide FIFO ordering.
         return left == right ? this.mSequence - another.mSequence :
-                right.ordinal() - left.ordinal();
+               right.ordinal() - left.ordinal();
     }
 
     public enum Priority {
